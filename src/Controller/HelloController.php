@@ -42,7 +42,7 @@ class HelloController extends AppController {
     // }
     
     public function index() {
-        $this->viewBuilder()->autoLayout(false);
+        $this->viewBuilder()->enableAutoLayout(false);
         $this->set('title', 'Hello!');
         $this->set('message', 'This is message!');
     }
