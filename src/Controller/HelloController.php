@@ -4,9 +4,9 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 class HelloController extends AppController {
-	// public function initialize() {
-	// 	$this->viewBuilder()->setLayout('hello');
-	// }
+	public function initialize() {
+		$this->viewBuilder()->setLayout('hello');
+	}
     // クエリパラメーターTEST;
 // 	public function index() {
 //         $id = 'no name';
@@ -42,26 +42,32 @@ class HelloController extends AppController {
     // }
 
     public function index() {
-        $this->viewBuilder()->isAutoLayoutEnabled(false);
-        $this->set('title', 'Hello!');
+        // $this->viewBuilder()->isAutoLayoutEnabled(false);
+        // $this->set('title', 'Hello!');
 
-        if($this->request->isPost()) {
-            $this->set('data', $this->request->data['Form1']);
-        } else {
-            $this->set('data', []);
-        }
+        // if($this->request->isPost()) {
+        //     $this->set('data', $this->request->data['Form1']);
+        // } else {
+        //     $this->set('data', []);
+        // }
+        $this->set('header', ['subtitle'=>'from Controller with Love♡']);
+        $this->set('footer', ['copyright'=>'名無しの権兵衛']);
         }
 
-    public function form() {
-        $this->viewBuilder()->isAutoLayoutEnabled(false);
-        $name = $this->viewBuilder()->data['name'];
-        $mail = $this->viewBuilder()->data['mail'];
-        $age = $this->viewBuilder()->data['age'];
-        $res = 'こんにちは，' . $name . ' (' . $age . ')さんメールアドレスは，' . ' ですね？';
-        $values = [
-            'title'=>'Result',
-            'message'=> $res
-        ];
-        $this->set($values);
-    }
+//     public function form() {
+//         $this->viewBuilder()->isAutoLayoutEnabled(false);
+//         $name = $this->viewBuilder()->data['name'];
+//         $mail = $this->viewBuilder()->data['mail'];
+//         $age = $this->viewBuilder()->data['age'];
+//         $res = 'こんにちは，' . $name . ' (' . $age . ')さんメールアドレスは，' . ' ですね？';
+//         $values = [
+//             'title'=>'Result',
+//             'message'=> $res
+//         ];
+//         $this->set($values);
+//     }
+//     public function beforeFilter(Event $event)
+// {
+//  $this->getEventManager()->off($this->Csrf);
+// }
     }
