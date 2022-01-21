@@ -4,24 +4,36 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 class PeopleController extends AppController {
+
     public function index() {
-    if ($this->request->is('post')){
-        $find = $this->request->data['People']['find'];
-        $condition = ['condition'=>['name'=>$find]];
-        $data = $this->People->find('all', $condition);
-    } else {
-        $data = $this->People->find('all');
-    }
-        $this->set('data', $data);
-    }
+        if ($this->request->isPost()){
+            $find = $this->request->data['People']['find'];
+            $data = $this->People->find('me', ['me'=>$find])
+                ->contain(['Messages']);
+        } else {
+            $data = $this->People->find('byAge')
+                ->contain(['Messages']);
+        }
+            $this->set('data', $data);
+        }
 
     public function add() {
+        $msg = 'please type your personal data...';
         $entity = $this->People->newEntity();
+        if ($this->request->is('post')){
+            $data = $this->request->data['People'];
+            $entity = $this->People->newEntity($data);
+            if ($this->People->save($entity)){
+                return $this->redirect(['action'=>'index']);
+            }
+        $msg = 'Error was occured...';
+        }
+        $this->set('msg', $msg);
         $this->set('entity', $entity);
-    }
+        }
 
     public function create() {
-        if ($this->repuest->is('post')){
+        if ($this->request->is('post')){
         $data = $this->request->data['People'];
         $entity = $this->People->newEntity($data);
         $this->People->save($entity);
