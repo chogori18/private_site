@@ -20,13 +20,10 @@
     </div>
         <div class="row">
             <table>
-          
                <tr><th>Select</th><td>
-                        
                     </td></tr>
                 <tr><th></th><td>
                         </td></tr>
-                
             </table>
         </div>
 </body>
