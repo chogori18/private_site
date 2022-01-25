@@ -32,3 +32,4 @@
 </html> -->
 <p>This is sample content.</p>
 <p>これは、Helloレイアウトを利用したサンプルです。</p>
+<?=$this->Url->build(['controller' => 'hello', 'action' =>'show', '_ext' =>'png', 'sample']) ?>
