@@ -2,11 +2,12 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Event\Event;
-
 class AuctionBaseController extends AppController
 {
+    
 //初期化処理
     public function initialize()
     {
@@ -59,7 +60,7 @@ function logout(){
     }
 
 // 認証を使わないページの設定
-public function beforeFilter(Event $event){
+public function beforeFilter(Event $event) {
     parent::beforeFilter($event);
     $this->Auth->allow([]);
 }
@@ -74,8 +75,9 @@ public function isAuthorized($user = null){
     if($user['role'] === 'user'){
         if ($this->name == 'Auction'){
             return true;
-        }else {
+        } else {
         return false;
+        }
     }
     //他はすべてfalse
     return false;

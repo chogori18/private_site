@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+
 use Cake\Event\Event;
 use Exception;
 
@@ -9,18 +10,18 @@ class AuctionController extends AuctionBaseController
 {
     //デフォルトテーブルを使わない
     public $useTable = false;
-
+    
     //初期化処理
     public function initialize()
     {
         parent::initialize();
         $this->loadComponent('Paginator');
         //必要なモデルをすべてロード
-        $this->loadComponent('Users');
-        $this->loadComponent('Biditems');
-        $this->loadComponent('Bidrequsts');
-        $this->loadComponent('Bidinfo');
-        $this->loadComponent('Bidmessages');
+        $this->loadModel('Users');
+        $this->loadModel('Biditems');
+        $this->loadModel('Bidrequsts');
+        $this->loadModel('Bidinfo');
+        $this->loadModel('Bidmessages');
         //ログインしているユーザー情報をauthuserに設定
         $this->set('authuser', $this->Auth->user());
         //レイアウトをauctionに変更
