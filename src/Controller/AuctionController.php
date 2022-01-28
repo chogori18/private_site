@@ -92,7 +92,7 @@ class AuctionController extends AuctionBaseController
             //$biditemを保存する
             if ($this->Biditems->save($biditem)) {
                 //成功時のメッセージ
-                $this->Flash->sucsess(__('保存しました。'));
+                $this->Flash->success(__('保存しました。'));
                 //トップページ(index)に移動
                 return $this->redirect(['action' => 'index']);
             }
