@@ -61,13 +61,13 @@ class BidmessagesTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmptyString('id', null, 'create');
+            ->allowEmpty('id', null, 'create');
 
         $validator
             ->scalar('message')
             ->maxLength('message', 21800)
             ->requirePresence('message', 'create')
-            ->notEmptyString('message');
+            ->notEmpty('message');
 
         return $validator;
     }

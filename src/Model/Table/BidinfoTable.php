@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -65,12 +66,12 @@ class BidinfoTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmptyString('id', null, 'create');
+            ->allowEmpty('id', null, 'create');
 
         $validator
             ->integer('price')
             ->requirePresence('price', 'create')
-            ->notEmptyString('price');
+            ->notEmpty('price');
 
         return $validator;
     }

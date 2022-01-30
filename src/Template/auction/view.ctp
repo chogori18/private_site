@@ -52,7 +52,7 @@
     <table cellpadding="0" cellspacing="0">
     <thead>
     <tr>
-        <th scope="col">入札者</th>
+        <th sco  pe="col">入札者</th>
         <th scope="col">金額</th>
         <th scope="col">入札日時</th>
     </tr>

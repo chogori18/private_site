@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -64,18 +65,18 @@ class BiditemsTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmptyString('id', null, 'create');
+            ->allowEmpty('id', null, 'create');
 
         $validator
             ->scalar('name')
-            ->maxLength('name', 50)
+            ->maxLength('name', 100)
             ->requirePresence('name', 'create')
-            ->notEmptyString('name');
+            ->notEmpty('name');
 
         $validator
             ->boolean('finishd')
             ->requirePresence('finishd', 'create')
-            ->notEmptyString('finishd');
+            ->notEmpty('finishd');
 
         $validator
             ->dateTime('endtime')

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -36,7 +37,7 @@ class UsersTable extends Table
         parent::initialize($config);
 
         $this->setTable('users');
-        $this->setDisplayField('id');
+        $this->setDisplayField('username');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Bidinfo', [
@@ -63,25 +64,25 @@ class UsersTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmptyString('id', null, 'create');
+            ->allowEmpty('id', null, 'create');
 
         $validator
             ->scalar('username')
-            ->maxLength('username', 50)
+            ->maxLength('username', 100)
             ->requirePresence('username', 'create')
-            ->notEmptyString('username');
+            ->notEmpty('username');
 
         $validator
             ->scalar('password')
-            ->maxLength('password', 50)
+            ->maxLength('password', 100)
             ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->notEmpty('password');
 
         $validator
             ->scalar('role')
-            ->maxLength('role', 50)
+            ->maxLength('role', 20)
             ->requirePresence('role', 'create')
-            ->notEmptyString('role');
+            ->notEmpty('role');
 
         return $validator;
     }
