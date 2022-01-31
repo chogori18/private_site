@@ -24,7 +24,7 @@
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('finishd') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('finished') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('endtime') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -36,7 +36,7 @@
                 <td><?= $this->Number->format($biditem->id) ?></td>
                 <td><?= $biditem->has('user') ? $this->Html->link($biditem->user->id, ['controller' => 'Users', 'action' => 'view', $biditem->user->id]) : '' ?></td>
                 <td><?= h($biditem->name) ?></td>
-                <td><?= h($biditem->finishd) ?></td>
+                <td><?= h($biditem->finished) ?></td>
                 <td><?= h($biditem->endtime) ?></td>
                 <td><?= h($biditem->created) ?></td>
                 <td class="actions">

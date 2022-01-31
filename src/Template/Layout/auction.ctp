@@ -16,10 +16,10 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar titlebar" data-tapbar role="bavigation">
+    <nav class="top-bar titlebar" data-topbar role="navigation">
         <ul class="title0area large-3 medium-4 columns name">
             <li>
-                <h1><?= $this->Html->link(__('Auvtion! [' . $authuser['username'] . ']'),['action' => 'index']) ?></h1>
+                <h1><?= $this->Html->link(__('Auction! [' . $authuser['username'] . ']'),['action' => 'index']) ?></h1>
             </li>
         </ul>
         <div class="action index medium-9 columns content">

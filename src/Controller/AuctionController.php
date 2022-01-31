@@ -20,7 +20,7 @@ class AuctionController extends AuctionBaseController
         //必要なモデルをすべてロード
         $this->loadModel('Users');
         $this->loadModel('Biditems');
-        $this->loadModel('Bidrequsts');
+        $this->loadModel('Bidrequests');
         $this->loadModel('Bidinfo');
         $this->loadModel('Bidmessages');
         //ログインしているユーザー情報をauthuserに設定
@@ -47,20 +47,30 @@ class AuctionController extends AuctionBaseController
             'contain' => ['Users', 'Bidinfo', 'Bidinfo.Users']
         ]);
         //オークション終了時の処理
-        if ($biditem->endtime < new \DateTime('now') and '$biditem->finished == 0) {
+        if ($biditem->endtime < new \DateTime('now') and $biditem->finished == 0) {
             //finishedを1に変更して保存
             $biditem->finished = 1;
-            $this->$biditems->save($biditem);
+            $this->Biditems->save($biditem);
             //Bidinfoを作成する
             $bidinfo = $this->Bidinfo->newEntity();
             //Bidinfoのbiditem_idに$idを設定
             $bidinfo->bidinfo_id = $id;
             //最高金額のBidrequestを検索
-            $bidrequest = $this->Bidrequests->find('all', [
-                'conditions'=>['biditem_id'=>$id],
-                'contain' => ['Users'],
-                'order'=>['price'=>'desc']])->first();
-            //Bidrequestが得られた時の処理
+            $bidrequest = $this->Bidrequests->find(
+                'all',
+                [
+                    'conditions'=>[
+                        'biditem_id'=>$id
+                    ],
+                    'contain' => [
+                        'Users'
+                    ],
+                    'order'=>[
+                        'price'=>'desc'
+                    ]
+                ]
+                )->first();
+                //Bidrequestが得られた時の処理
             if (!empty($bidrequest)){
                 //Bidinfoの各種プロパティを設定して保存する
                 $bidinfo->user_id = $bidrequest->user->id;
@@ -92,14 +102,17 @@ class AuctionController extends AuctionBaseController
             $biditem = $this->Biditems->patchEntity($biditem, $this->request->getData());
             //$biditemを保存する
             if ($this->Biditems->save($biditem)) {
+                // debug($biditem);
+                // die();
                 //成功時のメッセージ
                 $this->Flash->success(__('保存しました。'));
                 //トップページ(index)に移動
                 return $this->redirect(['action' => 'index']);
-            }
+            }else {
             //失敗時のメッセージ
             $this->Flash->error(__('保存に失敗しました。もう一度入力してください。'));
         }
+    }
         //値を保管
         $this->set(compact('biditem'));
     }
@@ -122,7 +135,7 @@ class AuctionController extends AuctionBaseController
                 //成功時のメッセージ
                 $this->Flash->success(__('入札を送信しました.'));
                 //トップページにリダイレクト
-                return $this->redirect(['acrion' => 'view', $biditem_id]);
+                return $this->redirect(['action'=>'view', $biditem_id]);
             }
             //失敗時のメッセージ
             $this->Flash->error(__('入札に失敗しました。もう一度入力してください。'));
@@ -161,7 +174,7 @@ class AuctionController extends AuctionBaseController
         $bidmsgs = $this->Bidmessages->find('all', [
             'conditions'=>['bidinfo_id' => $bidinfo_id],
             'contain' => ['Users'],
-            'order' => ['created' => 'desc']]);
+            'order'=>['created' => 'desc']]);
         $this->set(compact('bidmsgs', 'bidinfo', 'bidmsg'));
     }
 
@@ -171,7 +184,7 @@ class AuctionController extends AuctionBaseController
     {
         //自分が落札したBidinfoをページネーションで取得
         $bidinfo = $this->paginate('Bidinfo', [
-            'conditions' => ['bidinfo.user_id'=>$this->Auth->user('id')],
+            'conditions' => ['Bidinfo.user_id'=>$this->Auth->user('id')],
             'contain' => ['Users', 'Biditems'],
             'order' => ['created' => 'desc'],
             'limit' => 10])->toArray();
@@ -184,9 +197,9 @@ class AuctionController extends AuctionBaseController
     {
         //自分が出品したBiditemをページネーションで取得
         $biditems = $this->paginate('Biditems', [
-            'conditions' => ['biditems.user_id'=>$this->Auth->user('id')],
+            'conditions'=>['Biditems.user_id'=>$this->Auth->user('id')],
             'contain' => ['Users', 'Bidinfo'],
-            'order' => ['created' => 'desc'],
+            'order'=>['created' => 'desc'],
             'limit' => 10])->toArray();
         $this->set(compact('biditems'));
         }

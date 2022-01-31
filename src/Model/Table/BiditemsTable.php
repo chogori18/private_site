@@ -45,13 +45,13 @@ class BiditemsTable extends Table
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
-            'joinType' => 'INNER',
+            'joinType' => 'INNER'
         ]);
         $this->hasOne('Bidinfo', [
-            'foreignKey' => 'biditem_id',
+            'foreignKey' => 'biditem_id'
         ]);
         $this->hasMany('Bidrequests', [
-            'foreignKey' => 'biditem_id',
+            'foreignKey' => 'biditem_id'
         ]);
     }
 
@@ -65,18 +65,18 @@ class BiditemsTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', null, 'create');
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->scalar('name')
             ->maxLength('name', 100)
             ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmptyString('name');
 
         $validator
-            ->boolean('finishd')
-            ->requirePresence('finishd', 'create')
-            ->notEmpty('finishd');
+            ->boolean('finished')
+            ->requirePresence('finished', 'create')
+            ->notEmptyString('finished');
 
         $validator
             ->dateTime('endtime')

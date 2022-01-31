@@ -23,7 +23,7 @@
         <?php
             echo $this->Form->control('user_id', ['options' => $users]);
             echo $this->Form->control('name');
-            echo $this->Form->control('finishd');
+            echo $this->Form->control('finished');
             echo $this->Form->control('endtime');
         ?>
     </fieldset>

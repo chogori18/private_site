@@ -43,8 +43,8 @@
             <td><?= h($biditem->created) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Finishd') ?></th>
-            <td><?= $biditem->finishd ? __('Yes') : __('No'); ?></td>
+            <th scope="row"><?= __('Finished') ?></th>
+            <td><?= $biditem->finished ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
     <div class="related">

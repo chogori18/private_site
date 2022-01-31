@@ -66,12 +66,12 @@ class BidinfoTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', null, 'create');
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->integer('price')
             ->requirePresence('price', 'create')
-            ->notEmpty('price');
+            ->notEmptyString('price');
 
         return $validator;
     }

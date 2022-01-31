@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $user_id
  * @property string $name
- * @property bool $finishd
+ * @property bool $finished
  * @property \Cake\I18n\FrozenTime $endtime
  * @property \Cake\I18n\FrozenTime $created
  *
@@ -31,7 +31,7 @@ class Biditem extends Entity
     protected $_accessible = [
         'user_id' => true,
         'name' => true,
-        'finishd' => true,
+        'finished' => true,
         'endtime' => true,
         'created' => true,
         'user' => true,
