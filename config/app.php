@@ -51,7 +51,7 @@ return [
         'namespace' => 'App',
         'encoding' => env('APP_ENCODING', 'UTF-8'),
         'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
-        'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'UTC'),
+        'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'Asia/Tokyo'),
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -281,7 +281,7 @@ return [
             'password' => 'hogehoge123',
             'database' => 'mydata',
             'encoding' => 'utf8',
-            'timezone' => 'UTC',
+            'timezone' => 'Asia/Tokyo',
             /*
              * You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
              */
@@ -325,7 +325,7 @@ return [
             'password' => 'hogehoge123',
             'database' => 'test_cakephp',
             //'encoding' => 'utf8mb4',
-            'timezone' => 'UTC',
+            'timezone' => 'Asia/Tokyo',
             'cacheMetadata' => true,
             'quoteIdentifiers' => false,
             'log' => false,
