@@ -61,7 +61,7 @@ function login(){
 // ログアウト処理
 function logout(){
     // セッションを破棄
-        $this->request->session()->destroy();
+        $this->request->getSession()->destroy();
         return $this->redirect($this->Auth->logout());
     }
 

@@ -16,7 +16,7 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar titlebar" data-topbar role="navigation">
+    <nav class="top-bar title-bar" data-top-bar role="navigation">
         <ul class="title0area large-3 medium-4 columns name">
             <li>
                 <h1><?= $this->Html->link(__('Auction! [' . $authuser['username'] . ']'),['action' => 'index']) ?></h1>
@@ -40,6 +40,7 @@
             <li><?= $this->Html->link(__('あなたの出品情報'), ['action' => 'home2']) ?></li>
             <li><?= $this->Html->link(__('商品を出品する'), ['action' => 'add']) ?></li>
             <li><?= $this->Html->link(__('商品リストを見る'), ['action' => 'index']) ?></li>
+            <li><?= $this->Html->link(__('ログアウト'), ['action' => 'logout']) ?></li>
         </ul>
     </nav>
 </div>
