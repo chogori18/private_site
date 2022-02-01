@@ -39,6 +39,7 @@ class BiditemsTable extends Table
 
         $this->setTable('biditems');
         $this->setDisplayField('name');
+        $this->setDisplayField('iteminfo');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -72,6 +73,12 @@ class BiditemsTable extends Table
             ->maxLength('name', 100)
             ->requirePresence('name', 'create')
             ->notEmptyString('name');
+
+        $validator
+        ->scalar('iteminfo')
+        ->maxLength('iteminfo', 300)
+        ->requirePresence('iteminfo', 'create')
+        ->notEmptyString('iteminfo');
 
         $validator
             ->boolean('finished')

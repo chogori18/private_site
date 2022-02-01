@@ -4,7 +4,8 @@
     <thead>
     <tr>
         <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-        <th class="main" scope="col"><?= $this->Paginator->sort('name') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+        <th class="main" scope="col"><?= $this->Paginator->sort('iteminfo') ?></th>
         <th scope="col"><?= $this->Paginator->sort('created') ?></th>
         <th scope="col" class="actions"><?= __('Actions') ?></th>
     </tr>
@@ -13,7 +14,8 @@
     <?php foreach ($bidinfo as $info): ?>
         <tr>
             <td><?= h($info->id) ?></td>
-            <td><?= h($info->biditem->name) ?></td>
+            <td><?= h($info->name) ?></td>
+            <td><?= h($info->iteminfo) ?></td>
             <td><?= h($info->created) ?></td>
             <td class="actions">
                 <?= $this->Html->link(__('View'), ['action' => 'msg', $info->id]) ?>

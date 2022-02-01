@@ -4,7 +4,8 @@
     <thead>
     <tr>
         <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-        <th class="main" scope="col"><?= $this->Paginator->sort('name') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+        <th class="main" scope="col"><?= $this->Paginator->sort('iteminfo') ?></th>
         <th scope="col"><?= $this->Paginator->sort('created') ?></th>
         <th scope="col" class="actions"><?= __('Actions') ?></th>
     </tr>
@@ -14,6 +15,7 @@
         <tr>
             <td><?= h($biditem->id) ?></td>
             <td><?= h($biditem->name) ?></td>
+            <td><?= h($biditem->iteminfo) ?></td>
             <td><?= h($biditem->created) ?></td>
             <td class="actions">
                 <?php if (!empty($biditem->bidinfo)): ?>
