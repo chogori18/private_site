@@ -3,7 +3,8 @@
 <table cellpadding="0" cellspacing="0">
     <thead>
         <tr>
-            <th scape="col"><?= $this->Paginator->sort('name') ?></th>
+        <th scape="col"><?= $this->Paginator->sort('id') ?></th>
+        <th scape="col"><?= $this->Paginator->sort('name') ?></th>
             <th class="main" scape="col"><?= $this->Paginator->sort('iteminfo') ?></th>
             <th scape="col"><?= $this->Paginator->sort('finished') ?></th>
             <th scape="col"><?= $this->Paginator->sort('endtime') ?></th>
@@ -13,6 +14,7 @@
     <tbody>
         <?php foreach ($auction as $biditem): ?>
         <tr>
+            <td><?= h($biditem->id) ?></td>
             <td><?= h($biditem->name) ?></td>
             <td><?= h($biditem->iteminfo) ?></td>
             <td><?= h($biditem->finished ? 'Finished':'') ?></td>
