@@ -5,10 +5,11 @@
         <tr>
         <th scape="col"><?= $this->Paginator->sort('id') ?></th>
         <th scape="col"><?= $this->Paginator->sort('name') ?></th>
-            <th class="main" scape="col"><?= $this->Paginator->sort('iteminfo') ?></th>
-            <th scape="col"><?= $this->Paginator->sort('finished') ?></th>
-            <th scape="col"><?= $this->Paginator->sort('endtime') ?></th>
-            <th scape="col" class="actions"><?= __('Actions') ?></th>
+        <th class="main" scape="col"><?= $this->Paginator->sort('iteminfo') ?></th>
+        <th scape="col"><?= $this->Paginator->sort('image') ?></th>
+        <th scape="col"><?= $this->Paginator->sort('finished') ?></th>
+        <th scape="col"><?= $this->Paginator->sort('endtime') ?></th>
+        <th scape="col" class="actions"><?= __('Actions') ?></th>
         </tr>
     </thead>
     <tbody>
@@ -17,6 +18,9 @@
             <td><?= h($biditem->id) ?></td>
             <td><?= h($biditem->name) ?></td>
             <td><?= h($biditem->iteminfo) ?></td>
+            <td class="action">
+                <?= $this->Html->image($biditem->image ,['width'=>'100','height'=>'100','alt'=>'商品の画像']) ?>
+            </td>
             <td><?= h($biditem->finished ? 'Finished':'') ?></td>
             <td><?= h($biditem->endtime) ?></td>
             <td class="action">

@@ -6,6 +6,7 @@
         <th scope="col"><?= $this->Paginator->sort('id') ?></th>
         <th scope="col"><?= $this->Paginator->sort('name') ?></th>
         <th class="main" scope="col"><?= $this->Paginator->sort('iteminfo') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('image') ?></th>
         <th scope="col"><?= $this->Paginator->sort('created') ?></th>
         <th scope="col" class="actions"><?= __('Actions') ?></th>
     </tr>
@@ -16,6 +17,7 @@
             <td><?= h($biditem->id) ?></td>
             <td><?= h($biditem->name) ?></td>
             <td><?= h($biditem->iteminfo) ?></td>
+            <td><?= $this->Html->image($biditem->image, ['width'=>'100','height'=>'100','alt'=>'商品の画像']) ?></td>
             <td><?= h($biditem->created) ?></td>
             <td class="actions">
                 <?php if (!empty($biditem->bidinfo)): ?>

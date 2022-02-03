@@ -36,6 +36,7 @@ class AuctionController extends AuctionBaseController
         $auction = $this->paginate('Biditems', [
             'order' =>['endtime'=>'desc'],
             'limit' => 10]);
+
         $this->set(compact('auction'));
     }
 
@@ -98,12 +99,21 @@ class AuctionController extends AuctionBaseController
         $biditem = $this->Biditems->newEntity();
         //POST送信時の処理
         if ($this->request->is('post')) {
+            $file = $this->request->getData('image'); //受け取り
+            $filePath = '../webroot/img/' . date("YmdHis") . $file['name'];
+            move_uploaded_file($file['tmp_name'], $filePath); //ファイル名の先頭に時間をくっつけて/webroot/imgに移動させる
+            $image = date("YmdHis") . $file['name'];
+            $data = [
+                'image' => $image
+            ];
+
+            $biditem = $this->Biditems->newEntity($data);
+            $post_data = $this->request->data();
+            $post_data['image'] = $image;
             //$biditemにフォームの送信内容を反映
-            $biditem = $this->Biditems->patchEntity($biditem, $this->request->getData());
+            $biditem = $this->Biditems->patchEntity($biditem, $post_data);
             //$biditemを保存する
             if ($this->Biditems->save($biditem)) {
-                // debug($biditem);
-                // die();
                 //成功時のメッセージ
                 $this->Flash->success(__('保存しました。'));
                 //トップページ(index)に移動

@@ -32,6 +32,7 @@ class Biditem extends Entity
         'user_id' => true,
         'name' => true,
         'iteminfo' => true,
+        'image' => true,
         'finished' => true,
         'endtime' => true,
         'created' => true,

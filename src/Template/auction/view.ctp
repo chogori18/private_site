@@ -17,6 +17,10 @@
     <td><?= $this->Number->format($biditem->id) ?></td>
 </tr>
 <tr>
+    <th scope="row">画像</th>
+    <td><?= $this->Html->image($biditem->image, ['height' => 100, 'width' => 100]) ?></td>
+</tr>
+<tr>
     <th scope="row">終了時間</th>
     <td><?= h($biditem->endtime) ?></td>
 </tr>
