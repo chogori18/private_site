@@ -9,6 +9,7 @@
         <th scope="col"><?= $this->Paginator->sort('image') ?></th>
         <th scope="col"><?= $this->Paginator->sort('created') ?></th>
         <th scope="col" class="actions"><?= __('Actions') ?></th>
+        <th scope="col" class="actions"><?= __('Delete') ?></th>
     </tr>
 </thead>
 <tbody>
@@ -17,13 +18,21 @@
             <td><?= h($biditem->id) ?></td>
             <td><?= h($biditem->name) ?></td>
             <td><?= h($biditem->iteminfo) ?></td>
-            <td><?= $this->Html->image($biditem->image, ['width'=>'100','height'=>'100','alt'=>'商品の画像']) ?></td>
+            <td class="action">
+                <?= $this->Html->image($biditem->image, ['width'=>'100','height'=>'100','alt'=>'商品の画像']) ?>
+            </td>
             <td><?= h($biditem->created) ?></td>
-            <td class="actions">
+            <td class="action">
                 <?php if (!empty($biditem->bidinfo)): ?>
                 <?= $this->Html->link(__('View'), ['action' => 'msg', $bidinfo->id]) ?>
                 <?php endif; ?>
             </td>
+            <td>
+                <?= $this->Form->postLink(__('Delete'), 
+                    ['action' => 'delete', $biditem->id],
+                    ['confirm' => __('削除してよろしいでしょうか。# {0}?', $biditem->id)]
+                ) ?>
+      </td>
         </tr>
         <?php endforeach; ?>
 </tbody>

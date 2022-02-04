@@ -213,4 +213,22 @@ class AuctionController extends AuctionBaseController
             'limit' => 10])->toArray();
         $this->set(compact('biditems'));
         }
+
+
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $biditem = $this->Biditems->get($id);
+        if($this->Biditems->delete($biditem)){
+
+        //成功時のメッセージ
+        $this->Flash->success(__('削除しました。'));
+        //トップページ(index)に移動
+        return $this->redirect(['action' => 'home2']);
+    } else {
+    //失敗時のメッセージ
+    $this->Flash->error(__('削除に失敗しました。もう一度入力してください。'));
+}
+return $this->redirect(['action' => 'index']);
     }
+}
