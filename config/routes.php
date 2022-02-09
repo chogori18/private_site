@@ -62,7 +62,15 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    // ルーティングのデフォルト
+    // $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    
+    // 落札情報
+    $routes->connect('/homeitem', ['controller' => 'Auction', 'action' => 'home']);
+    // 出品情報
+    $routes->connect('/home2item', ['controller' => 'Auction', 'action' => 'home2']);
+    // 商品の出品ページ
+    $routes->connect('/additem', ['controller' => 'Auction', 'action' => 'add']);
 
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
