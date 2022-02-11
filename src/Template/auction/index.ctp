@@ -28,14 +28,15 @@
             </td>
         </tr>
         <?php endforeach; ?>
+
+        <?php // サービス一覧
+    ?>
+    <?= $this->element('public_paginator', ['params' => $params]) ?>
+
     </tbody>
 </table>
-<div class="paginator">
+<!-- <div class="paginator">
     <ul class="pagination">
-        <?= $this->Paginator->first('<< ' . __('first')) ?>
-        <?= $this->Paginator->prev('< ' . __('previous')) ?>
-        <?= $this->Paginator->numbers() ?>
-        <?= $this->Paginator->next(__('next') . ' >') ?>
-        <?= $this->Paginator->last(__('last' . ' >>')) ?>
+        
     </ul>
-</div>
+</div> -->

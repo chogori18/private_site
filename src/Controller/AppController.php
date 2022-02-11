@@ -27,6 +27,12 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
+    // public $helpers = [  //Helperの指定
+    //     'MyAuth',
+    //     'Html' => ['className' => 'MyHtml'],
+    //     'Number' => ['className' => 'MyNumber'],
+    //     'Paginator' => ['className' => 'StPaginator', 'templates' => 'paginator-templates'], // Paginator をオーバーライドとテンプレートの設定
+    // ];
 
     /**
      * Initialization hook method.

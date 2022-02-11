@@ -6,6 +6,8 @@ use App\Controller\AppController;
 
 use Cake\Event\Event;
 use Exception;
+use Cake\ORM\TableRegistry;
+
 
 class AuctionController extends AuctionBaseController
 {
@@ -29,15 +31,25 @@ class AuctionController extends AuctionBaseController
         $this->viewBuilder()->setLayout('auction');
     }
 
-    //トップページ
+    // トップページ
     public function index()
     {
-        //ページネーションでBiditemsを取得
-        $auction = $this->paginate('Biditems', [
-            'order' =>['endtime'=>'desc'],
-            'limit' => 10]);
+        //コントローラー側でのページネーション（Biditemsを取得）
+        // $auction = $this->paginate('Biditems', [
+        //     'order' =>['endtime'=>'desc'],
+        //     'limit' => 10]);
+        // $this->set(compact('auction'));
 
-        $this->set(compact('auction'));
+
+        //O/Rマッパーを用いた記述
+        $auction = $this->Biditems->getAuctions();
+
+        //1ページあたり10件表示
+        $this->paginate = [
+            'limit' => 10
+        ];
+
+        $this->set('auction', $this->paginate($auction));
     }
 
     //商品情報の表示

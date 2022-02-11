@@ -5,7 +5,10 @@ namespace App\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
+
+use function React\Promise\all;
 
 /**
  * Biditems Model
@@ -110,4 +113,29 @@ class BiditemsTable extends Table
 
         return $rules;
     }
+
+    //O/Rマッパーを用いた記述
+    public function getAuctions()
+    {
+        $query = TableRegistry::get('Biditems')->find();
+
+        // ORM 記述
+        return $this->find()
+            ->order(['endtime' => 'DESC'])
+            ->all();
+    }
+
+
+//モデル側でのpagination
+    // public $paginate = array(
+    //     'Biditems' => array(
+    //         'id' => 0,
+    //     ),
+    //     'limit' => 10,
+    //     'order' => array(
+    //         'endtime' => 'desc'
+    //     )
+    // );
+
+
 }

@@ -65,6 +65,8 @@ Router::scope('/', function (RouteBuilder $routes) {
     // ルーティングのデフォルト
     // $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
     
+    //トップページ
+    $routes->connect('/index', ['controller' => 'Auction', 'action' => 'index']);
     // 落札情報
     $routes->connect('/homeitem', ['controller' => 'Auction', 'action' => 'home']);
     // 出品情報
