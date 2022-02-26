@@ -34,15 +34,12 @@ class AuctionController extends AuctionBaseController
     // トップページ
     public function index()
     {
-        //コントローラー側でのページネーション（Biditemsを取得）
-        // $auction = $this->paginate('Biditems', [
-        //     'order' =>['endtime'=>'desc'],
-        //     'limit' => 10]);
-        // $this->set(compact('auction'));
 
-
-        //O/Rマッパーを用いた記述
-        $auction = $this->Biditems->getAuctions();
+        //ページネーションでBiditemsを取得
+        $auction = $this->paginate('Biditems', [
+            'order' => ['endtime' => 'desc'],
+            'limit' => 10
+        ]);
 
         //1ページあたり10件表示
         $this->paginate = [
@@ -72,19 +69,19 @@ class AuctionController extends AuctionBaseController
             $bidrequest = $this->Bidrequests->find(
                 'all',
                 [
-                    'conditions'=>[
-                        'biditem_id'=>$id
+                    'conditions' => [
+                        'biditem_id' => $id
                     ],
                     'contain' => [
                         'Users'
                     ],
-                    'order'=>[
-                        'price'=>'desc'
+                    'order' => [
+                        'price' => 'desc'
                     ]
                 ]
-                )->first();
-                //Bidrequestが得られた時の処理
-            if (!empty($bidrequest)){
+            )->first();
+            //Bidrequestが得られた時の処理
+            if (!empty($bidrequest)) {
                 //Bidinfoの各種プロパティを設定して保存する
                 $bidinfo->user_id = $bidrequest->user->id;
                 $bidinfo->user = $bidrequest->user;
@@ -96,9 +93,10 @@ class AuctionController extends AuctionBaseController
         }
         //Bidrequestsからbiditem_idが$idのものを取得
         $bidrequests = $this->Bidrequests->find('all', [
-            'conditions'=>['biditem_id'=>$id],
+            'conditions' => ['biditem_id' => $id],
             'contain' => ['Users'],
-            'order'=>['price'=>'desc']])->toArray();
+            'order' => ['price' => 'desc']
+        ])->toArray();
         //オブジェクト類をテンプレートように設定
         $this->set(compact('biditem', 'bidrequest'));
     }
@@ -130,11 +128,11 @@ class AuctionController extends AuctionBaseController
                 $this->Flash->success(__('保存しました。'));
                 //トップページ(index)に移動
                 return $this->redirect(['action' => 'index']);
-            }else {
-            //失敗時のメッセージ
-            $this->Flash->error(__('保存に失敗しました。もう一度入力してください。'));
+            } else {
+                //失敗時のメッセージ
+                $this->Flash->error(__('保存に失敗しました。もう一度入力してください。'));
+            }
         }
-    }
         //値を保管
         $this->set(compact('biditem'));
     }
@@ -157,7 +155,7 @@ class AuctionController extends AuctionBaseController
                 //成功時のメッセージ
                 $this->Flash->success(__('入札を送信しました.'));
                 //トップページにリダイレクト
-                return $this->redirect(['action'=>'view', $biditem_id]);
+                return $this->redirect(['action' => 'view', $biditem_id]);
             }
             //失敗時のメッセージ
             $this->Flash->error(__('入札に失敗しました。もう一度入力してください。'));
@@ -180,23 +178,22 @@ class AuctionController extends AuctionBaseController
             //Bidmessageを保存
             if ($this->Bidmessages->save($bidmsg)) {
                 $this->Flash->success(__('保存しました。'));
-            }
-            else {
+            } else {
                 $this->Flash->error(__('保存に失敗しました。もう一度入力してください'));
             }
         }
         try {
             // $bidinfo_idからBidinfoを取得する
-            $bidinfo = $this->Bidinfo->get($bidinfo_id, ['contain'=>['Biditems']]);
-        }
-        catch (Exception $e){
+            $bidinfo = $this->Bidinfo->get($bidinfo_id, ['contain' => ['Biditems']]);
+        } catch (Exception $e) {
             $bidinfo = null;
         }
         // Bidmessageをbidinfo_idとuser_idで検索
         $bidmsgs = $this->Bidmessages->find('all', [
-            'conditions'=>['bidinfo_id' => $bidinfo_id],
+            'conditions' => ['bidinfo_id' => $bidinfo_id],
             'contain' => ['Users'],
-            'order'=>['created' => 'desc']]);
+            'order' => ['created' => 'desc']
+        ]);
         $this->set(compact('bidmsgs', 'bidinfo', 'bidmsg'));
     }
 
@@ -206,10 +203,11 @@ class AuctionController extends AuctionBaseController
     {
         //自分が落札したBidinfoをページネーションで取得
         $bidinfo = $this->paginate('Bidinfo', [
-            'conditions' => ['Bidinfo.user_id'=>$this->Auth->user('id')],
+            'conditions' => ['Bidinfo.user_id' => $this->Auth->user('id')],
             'contain' => ['Users', 'Biditems'],
             'order' => ['created' => 'desc'],
-            'limit' => 10])->toArray();
+            'limit' => 10
+        ])->toArray();
         $this->set(compact('bidinfo'));
     }
 
@@ -219,31 +217,33 @@ class AuctionController extends AuctionBaseController
     {
         //自分が出品したBiditemをページネーションで取得
         $biditems = $this->paginate('Biditems', [
-            'conditions'=>['Biditems.user_id'=>$this->Auth->user('id')],
+            'conditions' => ['Biditems.user_id' => $this->Auth->user('id')],
             'contain' => ['Users', 'Bidinfo'],
-            'order'=>['created' => 'desc'],
-            'limit' => 10])->toArray();
+            'order' => ['created' => 'desc'],
+            'limit' => 10
+        ])->toArray();
         $this->set(compact('biditems'));
-        }
+    }
 
 
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $biditem = $this->Biditems->get($id);
-        if($this->Biditems->delete($biditem)){
+        if ($this->Biditems->delete($biditem)) {
 
-        //成功時のメッセージ
-        $this->Flash->success(__('削除しました。'));
-        //トップページ(index)に移動
-        return $this->redirect(['action' => 'home2']);
-    } else {
-    //失敗時のメッセージ
-    $this->Flash->error(__('削除に失敗しました。もう一度入力してください。'));
-}
-return $this->redirect(['action' => 'index']);
+            //成功時のメッセージ
+            $this->Flash->success(__('削除しました。'));
+            //トップページ(index)に移動
+            return $this->redirect(['action' => 'home2']);
+        } else {
+            //失敗時のメッセージ
+            $this->Flash->error(__('削除に失敗しました。もう一度入力してください。'));
+        }
+        return $this->redirect(['action' => 'index']);
     }
 
     public function asama()
-    {}
+    {
+    }
 }
